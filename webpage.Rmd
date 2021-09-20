@@ -24,8 +24,8 @@ knitr::include_graphics('https://phyweb.physics.nus.edu.sg/how/img/2014_how_logo
 
 |           | Link |
 | --------- | :--: |
-| Slides    | [PDF](https://www.physics.nus.edu.sg/how/piracy/2019_piracy_ws.pdf)  |
-| Worksheet | [PDF](https://www.physics.nus.edu.sg/how/piracy/2019_piracy_slides.pdf)  |
+| Slides    | [PDF](./pdf-files/piracy_slides.pdf)  |
+| Worksheet | [PDF](./pdf-files/piracy_ws.pdf)  |
 
 ## Harrison's Watch
 
