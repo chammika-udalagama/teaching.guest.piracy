@@ -1,0 +1,247 @@
+body {
+    font-size: large;
+}
+
+
+/*----------------------------------------*/
+
+
+/*                                        */
+
+
+/*              top table                 */
+
+
+/*                                        */
+
+
+/*----------------------------------------*/
+
+table.summaryTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.summaryTable th {
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+table.summaryTable tr {
+    border-bottom: 1px solid black;
+}
+
+table.summaryTable th:nth-child(1) {
+    width: 50px;
+}
+
+table.summaryTable th:nth-child(2) {
+    width: 225px;
+}
+
+table.summaryTable th:nth-child(3) {
+    width: 100px;
+}
+
+table.summaryTable th:nth-child(4) {
+    width: 125px;
+}
+
+table.summaryTable td:nth-child(4) {
+    width: 125px;
+    line-height: 15px;
+    padding: 10px 0px 10px 0px;
+}
+
+table.summaryTable th:nth-child(5) {
+    width: 150px;
+}
+
+table.summaryTable td:nth-child(2),
+table.summaryTable td:nth-child(3) {
+    text-align: left;
+}
+
+
+/*----------------------------------------*/
+
+
+/*                                        */
+
+
+/*              notes table                */
+
+
+/*                                        */
+
+
+/*----------------------------------------*/
+
+table.noteTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+    /*    text-align: center;*/
+    width: 90%;
+    padding: none;
+}
+
+table.noteTable tr {
+    height: 30px;
+    border: none;
+}
+
+table.noteTable td {
+    border: 1px solid black;
+}
+
+
+/*----------------------------------------*/
+
+
+/*                                        */
+
+
+/*              main table                */
+
+
+/*                                        */
+
+
+/*----------------------------------------*/
+
+table.mainTable {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+}
+
+table.mainTable th {
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+table.mainTable td:nth-child(2) {
+    line-height: 20px;
+    text-align: center;
+}
+
+table.mainTable td:nth-child(4) {
+    line-height: 20px;
+    padding: 10px;
+    /*    background: blue;*/
+}
+
+table.mainTable td:nth-child(6) {
+    /*    line-height: 20px;*/
+    /*    padding: 10px;*/
+    /*    background: blue;*/
+    text-align: center;
+    font-size: 15px;
+}
+
+
+/*
+table.mainTable td:nth-child(1),
+table.mainTable td:nth-child(2),
+table.mainTable td:nth-child(3) {
+    font-size: small;
+    font-variant: small-caps;
+}
+*/
+
+table.mainTable tr {
+    min-height: 50px;
+    height: 50px;
+    border-bottom: 1px solid gray;
+}
+
+table.mainTable tr:nth-child(8),
+table.mainTable tr:nth-child(16) {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 75px;
+}
+
+table.mainTable tr:nth-child(14) {
+    border-bottom: none;
+}
+
+.innerCell {
+    height: 30px;
+    width: 75px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+/*----------------------------------------*/
+
+ul.myInternal {
+    width: 95%;
+    color: black;
+    font-size: 16px;
+    text-align: left;
+    margin: 10px;
+    list-style: none;
+}
+
+ul.myInternal li {
+    margin: -10px 0;
+}
+
+ul.myInternal li:before {
+    content: "-";
+    padding-right: 5px;
+}
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    color: red;
+}
+
+
+/*----------------------------------------*/
+
+.myTime {
+    text-align: right;
+    color: #1EA460;
+}
+
+.specialDays {
+    background: #fafafa;
+    background: #a94442;
+    text-decoration-color: aqua;
+}
+
+#subText {
+    font-size: 12px;
+    color: darkgrey
+}
+
+.underText {
+    font-size: 12px;
+    color: darkgray;
+    text-align: center;
+    width: 100%;
+    font-variant: small-caps;
+}
+
+.underText-TBL {
+    color: darkblue;
+}
+
+.underText-deadline {
+    color: black;
+}
+
+#W13-Topic {
+    background: aliceblue;
+}
+
+

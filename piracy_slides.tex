@@ -1,0 +1,1482 @@
+%:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%:                                                                                                   	preamble                                                                                                    
+%:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%check if we are using old LaTeX stuff
+\RequirePackage[l2tabu, orthodox]{nag}
+\listfiles
+
+%include my beamer settings
+\include{myBeamerSetup}
+\def\logo{}
+
+%include mt commands and tweaks
+\include{mySharedTeX}
+ \hypersetup{colorlinks,linkcolor=,urlcolor=myPurple} 
+\include{listVideos} 
+
+\usepackage{accents}
+\usepackage{exerquiz}
+\usepackage{booktabs}
+
+\def\young{From~\cite{HughD.YoungRogerA.Freedman2007}}
+\def\garrison{From~\cite{Garrison2012}.}
+\def\dennyHow{From~\cite{Denny2008}.}
+\def\degree{$^\circ$}
+\def\st{\\[0.25cm]}
+\def\tw{\textwidth}
+\def\th{\textheight}
+
+\newcommand\ms[2]{#1_\text{\tiny #2}}
+\newcommand\nun[2]{#1~{\text{#2}}}
+\newcommand{\no}[1]{
+%#1
+}
+
+
+%:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%:                                                                                                  development  options                                                                                          
+%:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\newbool{inDevelopment}
+\setbool{inDevelopment}{false}
+%\setbool{inDevelopment}{true}
+
+\newbool{printmode}
+\setbool{printmode}{false}
+\setbool{printmode}{true}
+
+\renewcommand\emp[2]{{\only<{#1}>{\color{myGreen}} #2}}
+\newcounter{tempCtr}
+%\def\gcol{\item}
+%\def\setColg{}
+
+%:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+%:                                                                                                    document                                                                                                     
+%:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\def\e{\end{document}}
+
+\piracyTitle{-- Basic Ocean Navigation --}{For Aspiring Pirates, Privateers and other Adventures\ldots}{Guest Lecture}
+
+\begin{document}
+
+\ifbool{inDevelopment}{%in development
+\begin{frame}[label=x] \tiny \tableofcontents \end{frame} %:table of contents
+\includeonlyframes{x}	%only include
+\def\acroCol{\color{myRed}\bfseries } % show the answers for the acroTeX questions
+}
+{%not in development
+\renewcommand\fsection[1]{}
+\def\acroCol{\color{black}}
+}
+
+{\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+\begin{myFrame}{}{x}
+\medskip
+
+\small
+\begin{quote}
+``On my honour as a member of the Democratic Order of Pirates International (D.O.P.I), I promise to be greedy, tricky, mean and icky\ldots''
+\end{quote}
+
+\begin{flushright}
+\scriptsize
+\emph{ ``The Pirates Pledge"}\\
+from the cartoon \\``'The Adventures of Dr.Doolittle'' (1970) \\[5pt]
+\tiny (Watch \href{https://youtu.be/SQtMMYGTNz8}{Dr. Doolitle} on \you[0.04]{})
+\end{flushright}
+
+\end{myFrame}
+
+%:slide: title page 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{myFrame}{}{}
+\maketitle
+\vfill
+\begin{center}
+	\small Please visit:
+\url{http://physics.nus.edu.sg/how/piracy/}
+\end{center}
+
+\end{myFrame}
+}
+
+%:slide: Before the lecture\ldots 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+{
+%\setbeamertemplate{headline}{}
+%\setbeamertemplate{frametitle}{}
+\begin{myFrame}{Lecture Objectives\ldots}{}
+\def\mySize{\scriptsize}
+\smallskip
+
+\begin{columns}
+%________________
+\column{0.3\linewidth}
+\includegraphics[width=\linewidth]{./figures/t03_globe_east_2048.jpg}
+%________________
+\column{0.3\linewidth}
+\includegraphics[clip=true, trim=35cm 7.25cm 0cm 0cm,width=\linewidth]{./figures/t03_02p037_u01.jpg}
+%________________
+\column{0.3\linewidth}
+\includegraphics[width=\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p240_f18.jpg}
+\end{columns}
+
+\al[0.775]{\setCol
+\begin{itemize}\mySize
+\item Add a scientific context to what you are learning in GEK2049/GEH1013.
+\item Give you an appreciation of how challenging it was to be out in the ocean.
+
+\item After this lecture you should:
+\begin{enumerate}[-]\scriptsize %\color{red}
+\item be able to use Polaris to determine your latitude.
+\item be able to use the sun and a watch to determine longitude.
+\item explain why maps are never perfect.
+\item explain how the trade winds and monsoons are formed.
+\item explain how ocean currents are formed.
+%\item Appreciate the importance of the Coriolis effect on ocean travel.
+%\item Appreciate the importance of the ocean in shaping out history.
+\end{enumerate}
+\end{itemize}}
+\end{myFrame}
+}
+
+%:slide Isn't the Earth flat? 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{The world, she is flat\ldots}{}
+\def\h{0.45\textheight}
+\def\hh{0.455\textheight}
+
+\smallskip
+
+\begin{columns}[t]
+%________________
+\column{0.5\linewidth}
+\def\img{\includegraphics[height=\h]{./figures/t03_Buggs_flat.jpg}}
+\video{\img}{Bugs Bunny proves the world is round.\newline (Watch~\you{} \vidFlat)}{}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[height=\hh,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/how_1680x1050_discworld-terry-pratchett-wallpaper-e1367902680361.jpg}}{Terry Practhett's `Discworld'.}{Image from \href{http://zayngotnews.files.wordpress.com/2013/05/1680x1050_discworld-terry-pratchett-wallpaper-e1367902680361.jpg}{www.gopixpic.com}}
+\end{columns}
+
+\begin{myBlock}[0.85\linewidth]{A Quick Question}
+On an adventure trip you come across a people that know nothing of satellites (remember 1959 is not that long ago). 
+\newline How will you convince them that the Earth is not flat like `Discworld'? (Perhaps not the way Bugs does\ldots \smiley{})
+\end{myBlock}
+
+\end{myFrame}
+
+%:slide Proving that Earth is Spherical 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Did you know that the Earth is Spherical?}{}
+\def\h{0.475\textheight}
+\bigskip
+
+%\includegraphics[height=0.45\textheight]{./figures/t03_globe_east_2048.jpg}\hspace{0cm}
+\begin{tabular}{C{0.5\linewidth}C{0.5\linewidth}}
+\fig{\includegraphics[height=\h]{./figures/t03_shipOver.jpg}}{A ship `disappearing' over the horizon.}{} &
+\fig{\includegraphics[height=\h,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/how_ecl-lun-2008-08-16-umbral-shadow.jpg}}{Photos of Earth's Shadow by Anthony Ayiomamitis.}{From website of \href{http://www.perseus.gr/}{Anthony Ayiomamitis}}
+\end{tabular}
+
+\begin{myBlock}[0.5\linewidth]{A Quick Question}\centering
+Can you think of a way to estimate the size of the Earth?
+\end{myBlock}
+
+\end{myFrame}
+
+%:slide: Home 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{myFrame}{Home}{x}
+\def\h{0.7\textheight}
+
+\medskip
+\begin{columns}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[height=\h,clip=true,trim=1.35cm 0.75cm 1.35cm 0.75cm]{./figures/t01_1098px-The_Blue_Marble_4463x4163.jpg}}{`The Blue Marble' - By the crew of Apollo 17 (1972)}{From \href{http://en.wikipedia.org/wiki/Blue_Marble}{Wikipedia}.}
+
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[height=\h]{./figures/t03_globe_east_2048.jpg}}{`The Blue Marble' - Using the satellite MODIS (2002)}{From \href{http://visibleearth.nasa.gov/view.php?id=57723}{NASA}}
+\end{columns}
+
+\smallskip
+
+\al[0.5]{\setCol
+\begin{itemize}
+\col First satellite image of Earth in 1959!\\
+\col Have a play with \href{https://earth.google.com/web/}{Google Earth}.%Watch \vidHome\ on \you[0.1]{}. 
+\end{itemize}
+}
+
+\end{myFrame}
+
+%:slide: Home 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Home}{x}
+\framesubtitle{A Lunar Perspective\ldots}
+\bigskip
+\fig{\includegraphics[width=\textwidth,clip=true,trim=0cm 12cm 0cm 7cm]{./figures/nasa_AS11-44-6551.jpg}}{Image of the Earth taken from the moon by crew of Apollo 11 (1969).}{From \href{http://science.nasa.gov/science-news/science-at-nasa/2005/04oct_leonardo/}{NASA}}
+\end{myFrame}
+
+%:slide Eratosthenes 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Eratosthenes}{x}
+
+\setCol
+\begin{itemize}
+\col \href{http://en.wikipedia.org/wiki/Eratosthenes}{Eratosthenes of Cyrene} (276 BC - 194 BC) was the second librarian of the great Library of Alexandria.
+\col Eratosthenes figured out that the Earth was spherical and estimated the circumference to within 8\%, over 2000 years ago!!!
+\end{itemize}
+
+\begin{columns}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[width=0.75\linewidth]{./figures/t03_Portrait_of_Eratosthenes.png}}{Portrait of Eratosthenes}{From \href{http://en.wikipedia.org/wiki/Eratosthenes}{Wikipedia}}
+
+%________________
+\column{0.35\linewidth}
+\centerline{Watch \vidErato\ on  \you[0.175]{}.}
+\end{columns}
+
+\end{myFrame}
+
+%:slide The Size of the Earth 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{The Size of the Earth}{}
+
+\setCol
+\begin{itemize}
+\col Eratosthenes used a deep well, a long pole, some simple geometry and a lot of ingenuity and powers of observation to figure out the circumference of the earth.
+\end{itemize}
+%\vspace{0.5cm}
+
+\fig{\includegraphics[width=0.9\linewidth]{./figures/t03_02p036_f03.jpg}}{The idea behind Eratosthenes' method to determine the circumference of the Earth.}{\garrison}
+\begin{myBlock}[0.85\textwidth]{\centering A Quick Question}\centering
+If Eratosthenes had been in Singapore (\smiley{}), how well do you think would have his method worked?
+\end{myBlock}
+
+\end{myFrame}
+
+%:slide Features of Earth 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some Features of our Home}{}
+	\medskip
+	\fig{\includegraphics[width=\linewidth]{./figures/t03_01p004_f03.jpg}}{Locations of some significant features of our home.}{\garrison}
+\end{myFrame}
+
+
+%:slide Some features of the Earth 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some features\ldots the xkcd way}{}
+	\bigskip
+	\fig{\includegraphics[width=0.80\linewidth]{./figures/lakes_and_oceans_large.jpg}}{\smiley{}}{From \href{http://xkcd.com}{xkcd}}
+\end{myFrame}
+
+%:slide The Oceans at a Glance 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{The Ocean at a Glance}{}
+	\bigskip
+	
+	\tab{\includegraphics[width=0.725\linewidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/ocean_table.pdf}}{Borders, depths and other details of the five oceans.}{}
+\end{myFrame}
+
+%:slide How deep is your\ldots home 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{How deep is your\ldots home}{}
+\bigskip
+
+\begin{columns}
+%________________
+\column{0.375\linewidth}
+\fig{\includegraphics[width=\linewidth]{./figures/t03_04p142_f33.jpg}}{Comparing the highest and the deepest.}{\garrison}
+
+%\begin{myBlock}[\linewidth]{\centering A Quick Question}
+%Estimate the total liveable space offered by the ocean. It will turn out to be a bit more than 71\%!
+%\end{myBlock}
+
+%________________
+\column{0.675\linewidth}
+\fig{\includegraphics[width=\linewidth]{./figures/t03_04p123_f08.jpg}}
+{How the area of the Earth is distributed in elevation/depth. \newline Notice that more that 50\% of our planet is under more than 3~km of water! }{\garrison}
+\end{columns}
+
+\end{myFrame}
+
+%:slide Facts, Figures \& Drawing\ldots
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Water: Not a little, Not a lot, Certainly Not 71\%?}{}
+
+\fig{\begin{tikzpicture}
+\useasboundingbox (0,0.19\textheight) rectangle (\textwidth,0.875\textheight);
+\draw (6,4.85) node{\includegraphics[width=0.8\linewidth]{./figures/t03_01p003_f03.jpg}};
+\draw (10,3.85) node{\includegraphics[width=0.4\linewidth]{./figures/t03_01p002_f02.jpg}};
+\end{tikzpicture}
+}{Some water statistics.}{\garrison}
+
+\begin{myBlock}[0.75\textwidth]{\centering A Point to Ponder}\centering
+Where do you think all this water came from? Does the Earth lose water?
+\end{myBlock}
+
+\end{myFrame}
+
+
+
+\no{%:slide Not really Earth 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Not really that much {\it earth}?}{}
+\bigskip
+
+\fig{\includegraphics[width=0.9\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t01_earth_day.jpg}}{$\approx 71\%$ of our planet's \textbf{surface}  is covered by water.}{}
+
+\begin{myBlock}[0.75\textwidth]{\centering A Point to Ponder}\centering
+If there is so much water, why is there a `water crisis'\,?
+\end{myBlock}
+
+\end{myFrame}}
+
+%:slide Here is where I live 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{I live here...! Here?}{}
+\medskip
+\fig{\includegraphics[height=0.4\textheight]{./figures/t03_02p037_u01.jpg}
+\includegraphics[height=0.4\textheight,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t03_App3p553_f01.png}
+\includegraphics[height=0.45\textheight,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t03_App3p554_f03.png}
+}{ `axes' and `coordinates' to specify where we are on a globe\ldots}{\garrison}
+%
+\bigskip
+\setCol
+\begin{itemize}
+\col The Earth, being a ball, has no boundaries, so specifying location is not obvious.
+\col So we (actually Eratosthenes) draw a \href{http://en.wikipedia.org/wiki/Reticle}{graticule} to help us pin-point places.
+\col These are the \textbf{latitudes}\,(parallels) \& \textbf{longitudes}\,(meridians).
+\col In this scheme the Earth is split into 360 parallels \& meridians.
+\end{itemize}
+\forMe{\hfill How do you remember the parallels from the meridians.}
+%
+\end{myFrame}
+
+%:slide Parallels \& Meridians 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Where is Zero?}{}
+\medskip
+
+\samefig{\includegraphics[clip=true, trim=0cm 7.25cm 0cm 0cm,width=0.625\linewidth]{./figures/t03_02p037_u01.jpg}}{ `axes' and `coordinates' to specify where we are on a globe\ldots}{\garrison}{1}
+
+
+\setCol
+\small
+\begin{itemize}
+\col An obvious choice for zero latitude (parallel) is the equator.
+\col There is no such obvious choice of zero for the longitudes (meridians).
+\col It is agreed that the \textbf{prime meridian} (i.e. zero longitude) is that meridian passing through Greenwich, England (This was not always the case). \forMe{Canary Island}
+\col Read Dave Sobel's (fantastic) \emph{Longitude\ldots}~\cite{Sobel1995} for more (juicy) information.
+\end{itemize}
+\begin{myBlock}[0.55\linewidth]{\centering A Point to Ponder}\centering
+Do you think a simple $(x,y)$ Cartesian system of coordinates will  work?
+\end{myBlock}
+\end{myFrame}
+
+%:slide: Where in the World Are We?! 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{myFrame}{Where in the World Are We?!}{}
+\medskip
+\begin{columns}[b]
+%________________
+\column{0.5\linewidth}
+\setCol
+\begin{itemize} 
+\col The North Star\,(Polaris), can be used to determine latitude of a location in the \underline{northern}  hemisphere.
+\end{itemize}
+
+\fig{\includegraphics[width=0.9\textwidth]{./figures/t03_App3p555_f05.jpg}}{The North Star can be used to determine \textcolor{red}{latitude}.}{\garrison}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[width=0.925\textwidth]{./figures/t03_polarstern.jpg}}{The Earth's axis of rotation points at the North Star.}{\garrison}
+\end{columns}
+\forMe{\hfill Use Einstein and the globe}
+\end{myFrame}
+
+%:slide Using the North Star for Latitude 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Using the North Star for Latitude}{}
+\framesubtitle{Its all in the angles\ldots}
+%\smallskip
+%
+\samefig{\begin{tikzpicture}[thick,scale=0.7575]
+%\useasboundingbox (-\linewidth/2,0\textheight) rectangle (\linewidth/2,\textheight/2);
+\draw (0,0) node{\centering{\includegraphics[width=0.525\textwidth]{./figures/t03_App3p555_f05.jpg}}};
+\draw[dashed,thick, yellow] (-3.045,-0.1)--++(-90:3)--++(0:2.9)--cycle;
+\draw[dashed, myGreen] (-3.045,-0.1)--+(-45.75:-1);
+\draw[myRed] (-3.045,-3.1) rectangle +(0.125,0.125);
+\draw[myRed,rotate=41.75] (-2.455,1.85)rectangle +(0.125,0.125);
+\draw[myRed,<->] (-3.045,0)++(90:0.75)arc(-90:-148:-0.75);
+\draw[myRed,<->] (-3.045,0)++(-90:0.75)arc(-90:-137:0.75);
+\draw[myRed,<->] (-3.045,0)++(-47:3.6)arc(-50:-2.5:-0.65);
+\end{tikzpicture}
+}{How to determine \textcolor{red}{latitude} using Polaris}{\garrison}{2}
+%
+\begin{myBlock}[0.6\linewidth]{\centering A Point to Ponder}\centering
+What do we do in the southern hemisphere? Is there a `South' star?
+\end{myBlock}
+\end{myFrame} 
+
+%:slide Parallels \& Meridians 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Parallels \& Meridians}{}
+\begin{columns}
+%________________
+\column{0.6\linewidth}
+\setCol
+\begin{itemize}
+\col Latitudes and longitudes are given in degrees and by referring to \textbf{N}~or~\textbf{S} and \textbf{E}~or~\textbf{W}.
+%
+\col E.g. Singapore is approximately at:  
+\begin{center}\scriptsize
+1\s{$\circ$}N 103\s{$\circ$} E
+\end{center}
+%
+\col Further refinement is obtained by using minutes ($'$) and seconds ($''$).
+%
+\col $1^{\circ} = 60'$ and $1' = 60''$
+%
+\col E.g. Singapore is `exactly' at: 
+\begin{center}\scriptsize
+1\s{$\circ$}17`\,N~103\s{$\circ$}50`\,E
+\end{center}
+%
+\end{itemize}
+%________________
+\column{0.375\linewidth}
+%
+\fig{\includegraphics[clip=true, trim=35cm 7.25cm 0cm 0cm,width=\linewidth]{./figures/t03_02p037_u01.jpg}}{ Location can be specified using angles.}{\garrison}
+%
+%\quick{Where is this `exact' point in Singapore?}
+%\quick{How do you determine latitude when you are in the southern hemisphere?}
+\end{columns}
+
+\end{myFrame}
+
+%:slide This Minute is Not the Same as that Minute
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{This Minute is Not the Same as that Minute\ldots}{}
+\medskip
+\fig{\begin{tabular}{ccc}
+\includegraphics[height=0.19\textwidth]{./figures/t03_clock.jpg} 
+&\includegraphics[height=0.15\textwidth]{./figures/t03_Unequal.jpg}
+&\includegraphics[height=0.19\textwidth]{./figures/t03_protractor.jpg}
+\end{tabular}}{Minutes~($'$) and Seconds~($''$) are measures of angles, not time!}{}
+\setCol
+\begin{itemize}
+\col Degrees~(\s{$\circ$}), Minutes~($'$) and Seconds~($''$) measure \textbf{angles}.
+\col If we used the more familiar decimal system:
+\scriptsize
+\begin{align*}
+1' &= \left(\frac{1}{60}\right)^\circ = 0.017^\circ\\
+1'' &= \left(\frac{1}{60}\right)'=\left(\frac{1}{60}\times\frac{1}{60}\right)^\circ = \left(\frac{1}{3,600}\right)^\circ = 0.00028^\circ\\
+10^\circ 30' &= 10.5^\circ
+\end{align*}
+%\col E.g. \[10^\circ 30' = 10.5^\circ\]
+
+\col The use of degrees, minutes and seconds is retained for historical reasons.
+\end{itemize}
+
+
+\end{myFrame}
+
+%%:slide More about Minutes \& Seconds 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%																%
+%%								slide								%
+%%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{myFrame}{More about Minutes \& Seconds}{x}
+%
+%\begin{columns}
+%%________________
+%\column{0.4\linewidth}
+%\fig{\includegraphics[width=\textwidth]{./figures/t03_protractor.jpg}}{Minutes~($'$) and Seconds~($''$) are measures of angles, not time!}
+%
+%%________________
+%\column{0.575\linewidth}
+%\setCol
+%\begin{itemize}
+%\col Degrees~(\s{$\circ$}), Minutes~($'$) and Seconds~($''$) measure \textbf{angles}.
+%\col If we used the more familiar decimal system:
+%\scriptsize
+%\begin{align*}
+%1' &= \left(\frac{1}{60}\right)^\circ = 0.017^\circ\\
+%1'' &= \left(\frac{1}{60}\right)'=\left(\frac{1}{60}\times\frac{1}{60}\right)^\circ = \left(\frac{1}{3,600}\right)^\circ = 0.00028^\circ
+%\end{align*}
+%\end{itemize}
+%\end{columns}
+%\setCol
+%\begin{itemize}
+%\col E.g. \[10^\circ 30' = 10.5^\circ\]
+%\col The use of degrees, minutes and seconds is retained for historical reasons.
+%\end{itemize}
+%\end{myFrame}
+
+%:slide Importance of Longitude 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Importance of Longitude}{}
+	\begin{columns}
+		%________________
+		\column{0.6\linewidth}
+		\setCol
+		\begin{itemize}
+			\col Even if you knew north/south and  latitude, travelling the ocean without knowing your longitude is dangerous.
+			\remSpace
+			\begin{flushleft}\tiny
+				\begin{quotation}
+					``For lack of a practical method of determining longitude, every great captain in the Age of Exploration became lost at sea despite the best available charts and compasses. From Vasco da Gama to Vasco N\'u\~{n}ez de Balboa, from Ferdinand Magellan to Sir Francis Drake--they all got where they were going willy-nilly, by forces attributed to good luck or the grace of God.''
+				\end{quotation}
+				\hfill From Dave Sobel's `Longitude...'~\cite{Sobel1995}
+			\end{flushleft}
+			\col A storm or current can easily make you lose your bearing.
+			\col The `longitude problem' cost governments lots of lives and money that in 1714 the British government passed an act of parliament that offered a (staggering) prize of \pounds20,000 for an accurate solution. 
+		\end{itemize}
+		%________________
+		\column{0.3\linewidth}
+		\medskip
+		\fig{\includegraphics[width=0.85\linewidth]{./figures/t03_global_latitude.png}\newline
+			\includegraphics[width=0.95\linewidth]{./figures/t03_global_longitude.png}}{The heavenly bodies can help with latitude but not with longitude.}{}
+	\end{columns}
+\end{myFrame}
+
+%:slide: Longitude in the Days Past 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{myFrame}{Longitude in the Days Past}{}
+	
+	\begin{columns}
+		
+		%________________
+		\column{0.55\linewidth}
+		\setCol
+		\begin{itemize} 
+			\col When you are at sea, you can use a compass and the stars to determine your latitude, but not longitude.
+			\col Complicated methods involving the the Sun, the Moon and the stars were proposed and even used.
+			\col The most dependable method was to use `noon' at the present location, along with an accurate clock.
+			\col The problem was producing a clock that can withstand the vicissitudes of ocean travel.
+		\end{itemize}
+		%________________
+		\column{0.4\linewidth}
+		\fig{\includegraphics[width=0.6\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/how_Jacobstaff.jpg}}{Using a `\href{http://en.wikipedia.org/wiki/Jacob's_staff}{Jacob's Staff}' to determine the position of the Sun. Lots of people ended up blind in one eye with this instrument. }{From \href{http://en.wikipedia.org/wiki/Jacob's_staff}{Wikipedia}: "Jacobstaff" by John Seller (1603-1697) - Scan from the original book Practical navigation (1st edition 1669) p. 200}
+		
+	\end{columns}
+	
+\end{myFrame}
+
+
+
+
+%:slide Number Four 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{H-4}{}
+	\begin{columns}
+		%________________
+		\column{0.65\linewidth}
+		\setCol
+		\begin{itemize}
+			\col \href{http://en.wikipedia.org/wiki/John_Harrison}{John Harrison}'s fantastic chronometer, that won him the \pounds20,000 prize in 1773.
+			%
+			\col This is the fourth and the most accurate that Harrison manufactured.
+			%
+			\remSpace
+			\begin{flushleft}\tiny
+				\begin{quotation}
+					``I think I may make bold to say, that there is neither any other Mechanical or Mathematical thing in the World that is more beautiful or curious in texture than this my watch or Timekeeper for the Longitude . . . and I heartily thank Almighty God that I have lived so long, as in some measure to complete it.''
+				\end{quotation}
+				\hfill \color{black}-- John Harrison~\cite{Sobel1995}
+			\end{flushleft}
+			%
+			\col There is a very rich historical backstory to this topic involving a lot of great names such as Galileo, Euler, Newton, Halley\ldots \newline (Again: see `Longtude'~\cite{Sobel1995} for more details).
+		\end{itemize}
+		%________________
+		\column{0.4\linewidth}
+		\fig{\includegraphics[width=\linewidth]{./figures/t03_02p050_f18.jpg}}{Harrison's fourth timepiece: H-4.}{\garrison} 
+	\end{columns}
+\end{myFrame}
+
+%:slide Noon is not only for lunch\ldots 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Noon is Not Just Only for Lunch\ldots}{}
+
+\begin{columns}
+%________________
+\column{0.4\linewidth}
+\bigskip
+\fig{\includegraphics[width=\textwidth]{./figures/t03_shadow.jpg}}{The position of the Sun when it casts the shortest shadow signifies `noon'.}{}
+%________________
+\column{0.6\linewidth}
+%
+\setCol
+\small
+\begin{itemize}
+\col Noon marks the point when the Sun is at its peak, for that day.
+
+\col Noon is when the shadow cast by the Sun is the shortest (not necessarily zero).
+
+\col This unique position of the Sun can be used to standardize what time is.
+
+%\col \color{red} E.g. If you are at the 120\s{$\circ$}~W meridian, noon would have occurred at Greenwich 480~min ago. So, your are in the -8~h time zone. 
+
+%\col \color{red} Conversely, if the time at Greenwich is known when noon occurs at your location, say 13:00, then we must be at 1~h west or 15\s{$\circ$}~W of Greenwich.
+\end{itemize}
+\end{columns}
+\begin{myBlock}[0.6\linewidth]{\centering A Point to Ponder}
+\centering Can `sunrise' or `sunset' be used for time-keeping?
+\end{myBlock}
+\end{myFrame}
+
+%:slide Time & Longitude
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Time \& Longitude}{}
+\begin{columns}[t]
+%________________
+\column{0.425\linewidth}%
+\setCol  
+\begin{itemize} 
+\col Since there are 360 meridians and the Earth rotates through all these meridians in 24~hours:
+\remSpace\scriptsize  \color{myBrown}
+\[
+\begin{array}{ll}
+\parbox{0.9\linewidth}{{Time for the Sun `to go' from one meridian to the next}} \st
+= \frac{24\text{ h}}{360} = \frac{24\times60 \text{ min}}{360} = 4\text{ min}
+\end{array}
+\]
+\end{itemize}
+%________________
+\column{0.55\linewidth}
+\begin{itemize}
+\col So, if we know the time at our location, we can figure out the time at another location if we know its longitude.
+\col If we know the times at two locations, then we can figure out the difference in longitude between these two locations.
+\end{itemize}
+\end{columns}
+\bigskip
+
+\fig{\includegraphics[width=0.475\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/how_sunmap.jpeg}}{The time of day (usually) depends on the position of the Sun. Look \href{http://www.timeanddate.com/worldclock/sunearth.html}{\color{myPurple} here} to see where the Sun is now!}{Image from \href{http://www.timeanddate.com/worldclock/sunearth.html}{Day and Night World Map}}
+\end{myFrame}
+
+
+%%:slide Who sees the Sun First 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%																%
+%%								slide								%
+%%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{myFrame}{Who sees the Sun First}{x}
+%\bigskip
+%%\fig{\includegraphics[width=0.75\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/b03_world-map.png}}{}{}
+%\fig{\includegraphics[width=0.65\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t03_world_pol495.png}}{A map of the world.}{}
+%\begin{myBlock}[0.7\linewidth]{\centering Some Quick Questions}
+%\begin{enumerate}[-]\scriptsize
+%\item Who sees the Sun first; Singapore or Greenwich? 
+%\item What is the time difference between noon in Singapore (103\degree W) and at Greenwich?
+%\end{enumerate}
+%\end{myBlock}
+%\end{myFrame}
+
+
+
+\ifbool{true}{}{
+%:slide Time Differences 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{`Naive' \& Real Time Differences}{}
+\def\rc{\rowcolor{blue!3}}
+\def\st{\\[0.125cm]}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{./figures/t03_world_pol495.png}\\
+\scriptsize
+\begin{tabular}{l|rr|r||r|r}
+\multirow{2}{*}{City} &Longitude   & Longitude & Longitude & \multicolumn{2}{c}{Time Difference (h)}  \st
+ &  (' '' \degree)  & (\s{$\circ$}) & `Distance' & `Naive' & `Real' (UTC) \\
+\toprule
+ Singapore & $103^\circ 55'$~E &$103.9$~E & $0$ & $0$ & $0$ \st
+\rc New York & $73^\circ  56'$~W & $73.9$~W & $177.8$ & $-11.9$ & $-13$ \st
+ San Francisco & $122^\circ  25'$~W & $122.4$~W & $226.3$ & $-15.1$ & $-16$ \st
+\rc London & $0^\circ  15'$~E  &$0.3$~E & $103.6$ & $-6.9$ & $-8$ \st
+Shanghai & $121^\circ  28'$~E & $121.5$~E & $17.6$ & $1.2$ & $0$ \\
+\end{tabular}
+\end{center}
+
+\end{myFrame}
+
+
+%:slide `Real' Time Differences 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{`Real'  (UTC)Time Differences}{}
+\medskip
+\fig{\includegraphics[width=0.75\textwidth]{./figures/t03_Standard_time_zones_of_the_world.png}}{The world has been separated into 26 different time zones. \newline Visit \url{http://www.timeanddate.com/time/map/} for an interactive map.}{}
+\begin{itemize}
+\item UTC (\emph{Coordinated Universal Time}) times zones extends from -12 to +14 from Greenwich.
+\end{itemize}
+\end{myFrame}
+
+%:slide Where is a `Day' born? 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Where is a `Day' born?}{}
+\smallskip
+\fig{\includegraphics[width=0.24\textwidth]{./figures/t03_indate.jpg}}{The `International Date Line': where a day is born.}{}
+\setCol
+\begin{itemize}
+\col A `new day' is born when midnight passes the \textbf{International Date Line}.
+\col The date line should ideally follow the 180\s{$\circ$} meridian (it does not). 
+\col If you cross this line right $\rightarrow$ left (according to the image) you essentially travel into `tomorrow'. So you need to add a day to your watch.
+\col If you cross this line left $\rightarrow$ right  (according to the image) you essentially travel into `yesterday'. So you need to subtract a day from your watch.
+\col First place to experience a new day: Kiritimati or Chritmas Island ($157^\circ24"$~\textcolor{myRed}{W})
+\end{itemize}
+
+\end{myFrame}
+
+%:slide The Date Line is NOT straight! 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{The Date Line is NOT straight!}{}
+\bigskip
+\begin{columns}
+%________________
+\column{0.6\linewidth}
+\setCol
+\begin{itemize}\small
+\col Kiritimati or Christmas Island is in the Western hemisphere ($157^\circ24"$~\textcolor{myRed}{W})!
+\col This results in a large irregularity in the international date line.
+\col The UTC zones +13 and +14 are in this region.
+\col Notice how there is a difference of a day between Kiritimati and Hawaii, which is almost on the same meridian!
+\end{itemize}
+%________________
+\column{0.35\linewidth}
+\fig{\includegraphics[height=0.85\textheight,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/b03_International_Date_Line.png}}{The not-so-straight date line.}{Image from the \href{http://en.wikipedia.org/wiki/International_Date_Line}{Wikipedia} article on the International Date Line.}
+\end{columns}
+\end{myFrame}
+}
+%:slide Living on a Ball\ldots is Different 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Living on a Ball\ldots is Different}{}
+\bigskip
+\def\h{0.35\textheight}
+%
+\fig{\includegraphics[height=\h]{./figures/t03_triangle_angle1.jpg}\hspace{1pt}
+\includegraphics[height=\h]{./figures/t03_spherical_triangle.jpg}\hspace{1pt}
+\includegraphics[height=\h]{./figures/t03_SmallGreatCircles_700.png}
+}{The usual rules of geometry does not seem to work on spheres!}{}
+%
+\begin{tikzpicture}
+\useasboundingbox (0,0) rectangle (1cm,0.5cm);
+
+\draw (0.85\linewidth,-0.275\textheight)node[text width=0.5\linewidth]{
+\begin{myBlock}[0.6\linewidth]{\centering A Point to Ponder}
+\centering If all this is true, why don't we notice these weird things in everyday life?
+\end{myBlock}
+};
+\end{tikzpicture}
+%
+\setCol
+\begin{itemize}
+\col Triangles are different, `parallel' is different  \& the shortest distance is \underline{not} straight.\col The shortest distance between two points is along a `great circle'. \newline {\scriptsize (Check out: \href{http://demonstrations.wolfram.com/ShortestPathBetweenTwoPointsOnASphere/}{Shortest Path Between Two Points On A Sphere})}.
+\col A `great circle' shares the centre of the sphere.
+\col This is partly why planes seem to fly `funny'.  
+\newline {\scriptsize (Check out: \href{http://demonstrations.wolfram.com/GreatCirclesOnMercatorsChart/}{Great Circles On Mercators Chart})}.
+\end{itemize}
+
+\end{myFrame}
+
+%:slide The Real Size of the Earth 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{What is the `Real' Shape of the Earth}{}
+\framesubtitle{xkcd version}
+\bigskip
+\fig{\includegraphics[width=0.45\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/b03_actually.jpg}}{The shape of the Earth according to xkcd}{\xkcd}
+\end{myFrame}
+
+%:slide Map worth \$10,000,000! 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Map worth \$10,000,000!}{}
+\bigskip
+\fig{\includegraphics[width=0.85\textwidth]{./figures/t04_02p047_f14.jpg}}{The Waldseem\"uller map (1507). (See \href{http://en.wikipedia.org/wiki/Waldseemuller_map}{Wikipedia} for more information.)}{\garrison}
+\end{myFrame}
+
+%:slide Projections \& Distortions 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Projections \& Distortions}{}
+\bigskip
+\begin{columns}
+%________________
+\column{0.4\linewidth}
+\setCol
+\begin{itemize}
+\col No projection of a sphere on to a plane is ever perfect.
+\col Each projection is optimised for a specific use (e.g. navigation or surveying). 
+\newline {\scriptsize (Check out: \href{http://demonstrations.wolfram.com/WorldMapProjections/}{World Map Projections})}.
+\end{itemize}
+
+\fig{\includegraphics[width=\textwidth]{./figures/t04_map_comedy_tradegy.pdf}}{Two `faces': comedy\,(in the S) and tragedy\,(in the N) for reference.}{}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[width=0.85\textwidth]{./figures/t04_face_projections.pdf}}{What each projection does to the faces.}{}
+\end{columns}
+\end{myFrame}
+
+%:slide How well do you know your World? 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{How well do you know your World?}{}
+\bigskip
+\begin{columns}
+%________________
+\column{0.5\linewidth}
+%
+\fig{\includegraphics[width=\textwidth]{./figures/t04_MollweideProjection_800.png}}{Mollweide Projection}{}
+%
+\begin{myBlock}[0.9\linewidth]{\centering  A Quick Question}
+\centering Which is bigger; Africa or Greenland?
+\end{myBlock}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[width=0.9\textwidth]{./figures/t04_MercatorProjection_1000.png}}{Mercator Projection}{}
+\end{columns}
+\forMe{\hfill What is the difference between the two}
+\end{myFrame}
+
+%:slide Seasons in the Sun 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Seasons in the Sun}{}
+
+\def\tempText{
+\begin{itemize}\small
+\col The position of the Sun in the sky changes throughout the year.
+\col The Sun is directly over the equator twice a year:
+\begin{enumerate}\scriptsize
+\item Spring equinox($\approx$ 20\s{\text{th}} Mar)
+\item Fall equinox ($\approx$ 20\s{\text{th}} Sep.)
+\end{enumerate}
+\col The Sun is over the Tropics of Cancer and Capricorn during the solstices.
+\begin{enumerate}\scriptsize
+\item Summer Solstice ($\approx$ 20\s{\text{th}} Jun.)
+\item Winter Solstice ($\approx$ 20\s{\text{th}} Dec.)
+\end{enumerate}
+\end{itemize}
+
+}
+
+\begin{tikzpicture}
+\def\w{\textwidth}
+\def\h{0.25\textheight}
+\useasboundingbox (0,0) rectangle (\w,\h);
+\draw (0.7\w,0) node{\fig{\includegraphics[width=0.6\textwidth]{./figures/t11_08p233_f08.jpg}}{Seasons are caused due to the Earth's $23\frac{1}{2}$\degree tilt.}{\garrison}};
+\draw (0.2\w,0.35*\h) node[text width=0.46\tw]{\tempText};
+\end{tikzpicture}
+
+\end{myFrame}
+
+%:slide Angles Are Important 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Angles Are Important}{}
+
+\smallskip
+\fig{
+\begin{columns}
+%________________
+\column{0.45\linewidth}
+\includegraphics[width=\textwidth,clip=true,trim=0cm 0cm 14cm 30cm]{./figures/t11_08p231_f06.jpg}
+%________________
+\column{0.55\linewidth}
+\includegraphics[width=\textwidth,clip=true,trim=0cm 32cm 1cm 0cm]{./figures/t11_08p231_f06.jpg}
+\end{columns}\textcolor{white}{.}
+}{The angle of incidence of sunlight determines how much light is available for absrobtion.}{\garrison}
+
+\end{myFrame}
+
+\no{%:slide Earth's Energy Account 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Earth's Energy Account}{}
+
+\fig{\includegraphics[width=0.85\textwidth,clip=true,trim=0cm 0cm 0.75cm 0cm]{./figures/t11_08p230_f05.jpg}}{The Earth (averaged over a year) does not gain nor lose energy. \\This is because there is a radiative balance between the Earth and the Sun.}{\garrison}
+
+\end{myFrame}}
+
+%:slide Differential Heating of Earth 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Differential Heating of Earth}{}
+
+\fig{
+\begin{tabular}{cc}
+\includegraphics[width=0.55\textwidth,clip=true, trim=0cm 0cm 0cm 5cm]{./figures/t11_08p232_f07a.jpg} &
+\includegraphics[width=0.425\textwidth,clip=true, trim=0cm 18cm 0cm 0cm]{./figures/t11_08p232_f07b.png}
+\end{tabular}
+}{Averaged over a year; the Sun provides different amounts of heat to the different latitudes of the globe.}{\garrison}
+
+\al[0.9]{\setCol
+\begin{itemize}
+\col This differential heating leads to large scale atmospheric currents that try to redistribute the energy evenly.
+\col These currents carry $\frac{2}{3}$ (!) of the poleward heat from the tropics and also lead to many other effects.%\\ {\tiny(Low/High Pressure, Evaporation/Precipitation, Salinity variations, Doldrums, Horse latitude, Westerlies and Easterlies\ldots)}
+\end{itemize}}
+
+\end{myFrame}
+
+%:slide Who is heavier? Dry or Wet Air 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some Basics: Which is heavier, Dry or Wet Air?}{}
+\bigskip
+
+\fig{\includegraphics[width=0.5\textwidth,clip=true,trim=0cm 0cm 1.25cm 0cm]{./figures/t11_08p229_f02.jpg}}{Water vapour is an important component of the atmosphere.}{\garrison}
+
+\al[0.9]{\setCol
+\begin{itemize}
+\col Air is never dry. There is always some water vapor.
+%
+\col Water vapor can occupy as much as 4~\% of the air volume.
+%
+\col The residence time for water vapor in the lower atmosphere is 10~days!\\
+%
+\col Water vapour is one of the most important (good) greenhouse gases that is responsible for keeping the Earth warm.
+\end{itemize}}
+
+\end{myFrame}
+
+
+%:slide Rising \& Falling Air 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some Basics: Rising \& Falling Air}{}
+\bigskip
+
+\begin{columns}
+%________________
+\column{0.5\linewidth}
+\def\h{0.56\th}
+\fig{
+\includegraphics[height=\h,clip=true,trim=0cm 0cm 1.5cm 0cm]{./figures/t11_08p234_f09.jpg}
+}{Convection is an important process in atmospheric circulation.}{\garrison}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[width=0.75\textwidth,clip=true,trim=0cm 0cm 1.25cm 0cm]{./figures/t11_08p230_f04.jpg}}{Warm air rises due to its density but cools\\ down due to expansion.}{\garrison}
+\end{columns}
+%\centerline{\includegraphics[width=0.65\linewidth]{./figures/t09_balloons.png}}
+\setCol
+\begin{itemize}
+\col Rising air expands and cools %(recall the balloon experiment).
+\col Descending air gets compressed and heats up (recall pumping air into a tire).
+%\col Remember that the atmosphere is heater \emph{from below}.
+\end{itemize}
+\end{myFrame}
+
+
+\no{%:slide Motion in the Atmosphere: A Simplified View 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some Basics}{x}
+\medskip
+
+\def\h{0.86\th}
+
+\fig{
+\includegraphics[height=\h,clip=true,trim=0cm 0cm 1.5cm 0cm]{./figures/t11_08p234_f09.jpg}
+}{Convection is an important process in atmospheric circulation.}{\garrison}
+
+\end{myFrame}}
+
+
+%:slide Remember Coriolis? 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some Basics: Coriolis,}{}
+\medskip
+
+\fig{\includegraphics[width=0.5\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/how_coriolis.jpg}}{The Coriolis effect is paramount in determining atmospheric circulation.}{From the website \href{http://www.coastalpractice.net/glossary/coriolis\%20effect\%20\%20.htm}{CoPraNet}}
+
+\al[0.885]{\setCol
+\begin{itemize}
+\col Objects moving in the \textbf{Northern} hemisphere are deflected to the \textbf{right}.
+\col Objects moving in the \textbf{Southern} hemisphere are deflected to the \textbf{left}.
+\end{itemize}
+}
+\end{myFrame}
+
+%:slide Coriolis Effect: Trying to Make Sense 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Some Basics: Trying to Make Sense of Coriolis}{x}
+\bigskip
+
+\fig{\def\w{0.325\tw}
+\includegraphics[width=\w,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p234_f11.png}
+\includegraphics[width=\w,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p236_f13.png}
+\includegraphics[width=\w,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p236_f14.png}
+}{The Coriolis effect arises due to the rotation of the Earth.}{\garrison}
+
+\al{\setCol
+\begin{itemize}
+\col Different locations on the planet travel at different speeds. 
+\col If something moves from one location to another this difference leads to the appearance of the Coriolis force.
+\end{itemize}}
+
+\end{myFrame}
+
+%:slide Motion in the Atmosphere: A Simplified View 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Motion of the Atmosphere: A Simplified View}{}
+\medskip
+
+\def\h{0.5\th}
+
+\fig{
+\includegraphics[height=\h,clip=true,trim=0cm 0cm 1.5cm 0cm]{./figures/t11_08p234_f09.jpg}
+\hspace{5pt}
+\includegraphics[height=\h,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p234_f10.jpg}
+}{Convection is an important process in atmospheric circulation.}{\garrison}
+
+\end{myFrame}
+
+%:slide Motion in the Atmosphere: A more realistic View 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Motion of the Atmosphere: A More Realistic View}{}
+\medskip
+
+\fig{\includegraphics[width=0.85\textwidth,clip=true,trim=0cm 4.5cm 1cm 0cm]{./figures/t11_08p238_f16a.jpg}}{The differential heating of the Earth leads to the creation of atmospheric circulation cells.}{\garrison}
+
+\setCol \small
+\begin{itemize}
+\col There are three (Hadley, Ferrel, Polar) circulation cells.
+\col Regions where the air rises are low pressure regions.
+\col Regions where the air descends are high pressure regions.
+\end{itemize}
+
+\end{myFrame}
+
+%:slide Motion of the Atmosphere: A Realistic View 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Motion of the Atmosphere: An Even More Realistic View}{}
+\medskip
+
+\fig{\includegraphics[width=0.65\textwidth,clip=true,trim=0cm 3.5cm 1cm 0.5cm]{./figures/t11_08p237_f15.jpg}}{The Coriolis effect causes significant changes to the motion of air.}{\garrison}
+
+\end{myFrame}
+
+
+%:slide Motion in the Atmosphere: The Real Deal 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Motion of the Atmosphere: The Real Deal}{x}
+\medskip
+
+\fig{\includegraphics[width=0.55\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p240_f18.jpg}}{The circulation of the atmosphere is not readily predictable.}{\garrison}
+
+\end{myFrame}
+
+%:slide: The ITCZ 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{myFrame}{The ITCZ}{x}
+
+\fig{\includegraphics[width=0.9\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/how_itcz_goes11_lrg.jpg}}{The ITCZ is marked by the formation of clouds above it.}{Image from \href{http://earthobservatory.nasa.gov/IOTD/view.php?id=703}{NASA's Earth Observatory.}}
+
+\end{myFrame}
+
+%:slide: The ITCZ 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{myFrame}{The ITCZ}{x}
+\medskip
+
+\fig{\includegraphics[width=\textwidth,clip=true,trim=0cm 0cm 1.5cm 0cm]{./figures/t11_08p240_f17.jpg}}{The ITCZ is like the meteorological equator of the planet.}{\garrison}
+
+\al[0.9]{\setCol
+\begin{itemize}
+\col The Hadley cell does not really start at the equator but at the ITCZ.
+\col ITCZ (Intertropical Convergent Zone) is like the meteorological equator of the planet.
+\col ITCZ constantly shifts depending on the motion of the Sun.
+\col The location of the ITCZ is significantly affected by how the land and ocean is distributed.
+\col It is the motion of the ITCZ that causes the monsoons in our part of the world.
+\end{itemize}}
+
+\end{myFrame}
+
+
+%:slide Sea \& Land Breezes 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Sea \& Land Breezes}{x}
+
+\def\h{0.55\th}
+\fig{\includegraphics[height=\h,clip=true,trim=0cm 7.25cm 1.75cm 0cm]{./figures/t11_08p242_f20a.jpg}\hspace{1pt}
+\includegraphics[height=\h,clip=true,trim=0cm 9.35cm 1.5cm 0cm]{./figures/t11_08p242_f20b.jpg}
+}{The different heat capacity of land and sea leads to sea and land breezes.}{\garrison}
+
+\end{myFrame}
+
+%:slide Monsoons 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%																%
+%								slide								%
+%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{myFrame}{Monsoons}{x}
+\bigskip
+
+\fig{
+\includegraphics[width=0.5\textwidth,clip=true,trim=5cm 3cm 1.5cm 2cm]{./figures/t11_08p242_f19a.jpg}
+\includegraphics[width=0.5\textwidth,clip=true,trim=5cm 3cm 1.5cm 1.5cm]{./figures/t11_08p242_f19b.jpg}
+}{Position of the ITCZ in January (left) and July (right) and the consequent occurrence of the monsoons.}{\garrison}
+
+%\only<3>{
+%\centerline{\includegraphics[width=0.85\textwidth,clip=true,trim=0cm 2cm 1.35cm 0cm]{./figures/t11_08p242_f19c.jpg}}
+%}
+
+\al[1]{\setCol
+\begin{itemize}
+\col Monsoons are also created due to the different  heat capacities of  land/sea.
+\col Also involved is the north-south movement of the ITCZ.
+\col Take a loot at \href{http://www2.palomar.edu/users/pdeen/Animations/23_WeatherPat.swf}{this} (cool) interactive website.
+\end{itemize}
+}
+
+\end{myFrame}
+
+\no{%:slide What do you notice? 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+
+\begin{myFrame}{What do you notice?}{}
+\bigskip
+
+\fig{\includegraphics[width=0.5\textwidth,clip=true,trim=1cm 0cm 0cm 0cm]{./figures/t12_09p270_f10.jpg}}{This is an satellite image of a region at Cape Hatteras on the east coast of North America.}{\garrison}
+
+\end{myFrame}
+}
+
+%:slide Riding the EAC 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+
+\begin{myFrame}{Riding the EAC}{}
+
+\bigskip
+
+\fig{\includegraphics[width=0.7\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t12_EAC__600_450_q50.jpg}}{Remember the EAC in `Finding Nemo'?}{}
+
+\end{myFrame}
+
+%:slide The World's Surface Currents 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+
+\begin{myFrame}{The World's Surface Currents}{}
+\bigskip
+
+\fig{\includegraphics[width=0.85\textwidth,clip=true,trim=0cm 2.75cm 0.75cm 0cm]{./figures/t12_09p269_f08b.jpg}}{The surface water in certain region of the ocean are constantly flowing; like a river!}{\garrison}
+
+\end{myFrame}
+
+%:slide The Surface Currents 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+
+\begin{myFrame}{Currents}{}
+
+\def\h{0.375\th}
+\begin{columns}[b]
+%________________
+\column{0.5\linewidth}
+\samefig{\includegraphics[height=\h,clip=true,trim=0cm 2.75cm 0.75cm 0cm]{./figures/t12_09p269_f08b.jpg}}{Currents closer to the surface.}{\garrison}{3}
+%________________
+\column{0.5\linewidth}
+\fig{\includegraphics[height=\h,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t12_09p288_f31.jpg}}{Currents that are in the deep ocean.}{\garrison}
+\end{columns}
+\al[0.95]{\setCol
+\begin{itemize}
+\col A \textbf{current}  is a mass flow of water.
+%
+\col Currents can either be horizontal or vertical, closer to the surface or closer to the bottom.
+%
+\col \textbf{Surface currents}  are driven by wind.
+%
+%\col Deep currents driven by variations in temperature (\emph{thermo}) and salinity (\emph{haline}) and are called \textbf{thermohaline currents}.
+%%
+%\col Together they form a big energy transferring machine crucial to the climate and biological productivity of Earth.
+\end{itemize}}
+
+
+\end{myFrame}
+
+%:slide Surface Currents 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+
+\begin{myFrame}{Surface Currents}{}
+\medskip
+
+\fig{\includegraphics[width=0.75\tw,clip=true,trim=0cm 5.5cm 0cm 0cm]{./figures/t12_09p269_f08a.jpg}}{The gyres are responsible for carrying heat polewards.}{\garrison}
+
+\al[0.9]{\setCol
+\begin{itemize}
+\col Surface currents are created by wind friction and water up to $\approx$~400~m in depth are involved in surface currents  ($\approx$10\% of the ocean's water).
+\col These currents flow along the periphery of the ocean basins and are called \textbf{gyres} (There are five great gyres).
+\col The flow of the gyres are influenced by the location of the continents.
+%\col The strongest of them all;  Antarctic Circumpolar Current is unimpeded.
+\end{itemize}}
+
+\end{myFrame}
+
+%
+%%:slide Hurricanes 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%																%
+%%								slide								%
+%%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{myFrame}{Cyclones or Typhoons}{x}
+%
+%\fig{\includegraphics[width=0.8\textwidth,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p246_f25.jpg}}{The direction of rotation of a cyclone is determined by the Coriolis effect.}{\garrison}
+%
+%\al[0.875]{\setCol
+%\begin{itemize}
+%\col Cyclonic storms can occur when the water temperature is over 26~\degree C.
+%%\col The Coriolis effect is responsible for the spinning action of a cyclone.
+%\col The energy to run a cyclone comes from the energy of the Sun stored as latent heat of water!
+%\col A cyclonic storm in the northern hemisphere spins counterclockwise and clockwise in the southern hemisphere.
+%\end{itemize}}
+%
+%\end{myFrame}
+%
+%%:slide Which way to Spin? 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%																%
+%%								slide								%
+%%																%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{myFrame}{Which way to Spin?}{x}
+%\medskip
+%
+%\def\h{0.6\th}
+%\fig{\includegraphics[height=\h,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p245_f23.jpg}
+%\includegraphics[height=\h,clip=true,trim=0cm 0cm 0cm 0cm]{./figures/t11_08p249_f28.jpg}
+%}{The direction of spin of a cyclone is decided by the Coriolis effect.}{\garrison}
+%
+%\al{\setCol
+%\begin{itemize}
+%\col The direction of spin of a cyclone is decided by the Coriolis effect.
+%\col The air flowing towards a low pressure zone is deflected by the Coriolis effect.
+%\col This in turns gives a `spin' to the central air mass.
+%\end{itemize}
+%}
+%\end{myFrame}
+
+
+%:List of Definitions
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\ifbool{inDevelopment}{}{
+\listofdefinitions
+%\listofVideos
+%\listofsimulations
+%\mylistoftables
+}
+
+%:slide: List of Resources 
+%______________________________________________________________
+%|															|
+%|							slide								|
+%|_____________________________________________________________|
+\begin{frame}[label=x,allowframebreaks]
+\frametitle{List of Resources} 
+\scriptsize
+\bibliographystyle{amsalpha}
+\bibliography{myMasterBib.bib} 
+
+\end{frame}
+\end{document}
