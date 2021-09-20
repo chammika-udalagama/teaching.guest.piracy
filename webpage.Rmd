@@ -1,6 +1,8 @@
 ---
 title: "Basic Ocean Navigation"
-output:  html_document
+output: 
+  html_document:
+    self_contained: FALSE
 ---
 
 ```{r setup, include=FALSE}
@@ -31,12 +33,10 @@ knitr::include_graphics('https://phyweb.physics.nus.edu.sg/how/img/2014_how_logo
 
 ### Harrison's Watch
 
-(Courtesy of A/P Donna Brunero)
+<!-- <iframe width="100%" height="315" src="https://www.youtube.com/embed/T-g27KS0yiY" frameborder="0" allowfullscreen></iframe> -->
 
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/T-g27KS0yiY" frameborder="0" allowfullscreen></iframe>
-
-```{r}
-knitr::include_url("https://www.youtube.com/embed/T-g27KS0yiY")
+```{r,fig.align='center',fig.cap='(Courtesy of A/P Donna Brunero)'}
+knitr::include_url("http://www.youtube.com/embed/T-g27KS0yiY")
 ```
 
 
