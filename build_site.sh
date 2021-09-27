@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm webpage.html
+rm -r webpage_files
+
 echo "-----------------------------------> Knitting site."
 R -e "rmarkdown::clean_site()"
 
