@@ -1,6 +1,6 @@
 ---
 title: "Basic Ocean Navigation"
-output: 
+output:
   html_document:
     self_contained: false
     includes:
@@ -42,9 +42,11 @@ margin-right:auto;
 |           |                             Link                             |                                                      |
 | --------- | :----------------------------------------------------------: | :--------------------------------------------------: |
 | Slides    | <a href="./pdf-files/piracy_slides.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> |                                                      |
-| Worksheet | <a href="./pdf-files/piracy_ws.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> | <i class="fa fa-file-word fa-2x" aria-hidden="true"></i> |
+| Worksheet | <a href="./pdf-files/piracy_ws.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> | |
 
 </div>
+
+<!-- <i class="fa fa-file-word fa-2x" aria-hidden="true"></i>  -->
 
 ### Harrison's Watch
 
