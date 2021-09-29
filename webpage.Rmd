@@ -41,12 +41,11 @@ margin-right:auto;
 
 |           |                             Link                             |                                                      |
 | --------- | :----------------------------------------------------------: | :--------------------------------------------------: |
-| Slides    | <a href="./pdf-files/piracy_slides.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> |                                                      |
-| Worksheet | <a href="./pdf-files/piracy_ws.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> | |
+| Slides    | <a href="./files/piracy_slides.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> |                                                      |
+| Worksheet | <a href="./files/piracy_ws.pdf" target="_blank" style="color:black;"><i class="fas fa-file-pdf fa-2x"></i></a> |<a href="./files/piracy_ws.docx" target="_blank" style="color:black;"> <i class="fa fa-file-word fa-2x" aria-hidden="true"></i></a> |
 
 </div>
 
-<!-- <i class="fa fa-file-word fa-2x" aria-hidden="true"></i>  -->
 
 ### Harrison's Watch
 
@@ -58,6 +57,17 @@ knitr::include_url("https://www.youtube.com/embed/T-g27KS0yiY")
 
 ### Map Projections
 
-From [this website](https://www.jasondavies.com/maps/transition/)
+Source: [jasondavies.com/maps/transition](https://www.jasondavies.com/maps/transition/)
 
 <iframe width="100%" height="615" src="https://www.jasondavies.com/maps/transition" frameborder="0" allowfullscreen> </iframe>
+
+
+### Great Circle
+
+Source: [dynref.engr.illinois.edu/aos.html](https://dynref.engr.illinois.edu/aos.html)
+
+```{r}
+knitr::include_url('https://dynref.engr.illinois.edu/aos.html',height = '1000px')
+```
+
+
