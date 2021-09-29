@@ -1,0 +1,5 @@
+- Inlcude wind patterns
+- Ocean currents
+- Talks about the old 'wire maps'
+- Talks about using waves and diffraction
+- Using birds
